@@ -14,7 +14,14 @@ type EventItem = {
 };
 
 export default function Home() {
-    const [date, setDate] = useState("2026-10-20");
+    const [date, setDate] = useState(() => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    });
     const [events, setEvents] = useState<EventItem[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
